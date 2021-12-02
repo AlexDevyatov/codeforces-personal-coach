@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:cf_info_app/first.dart';
 import 'package:cf_info_app/model/functions.dart';
+import 'package:cf_info_app/model/profile_response.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Codeforces Profile Fetching'),
           ),
-          body: const Center(
+          body: Center(
             child: HandleForm(),
           ),
         ));
@@ -28,7 +32,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HandleForm extends StatelessWidget {
-  const HandleForm({Key? key}) : super(key: key);
+  HandleForm({Key? key}) : super(key: key);
+
+  final handleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +44,7 @@ class HandleForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
+              controller: handleController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0),
@@ -56,20 +63,38 @@ class HandleForm extends StatelessWidget {
                 labelText: 'Enter a codeforces handle',
               ),
             ),
-
             ElevatedButton(
               onPressed: () {
-
+                var profileInfoFuture =
+                    fetchProfileResponse(handleController.text);
+                profileInfoFuture.then((value) {
+                  log('data: ${value.status}');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileRoute()));
+                })
+                .catchError((error) {
+                  log('error: ${error.toString()}');
+                  _showSnackBar(context, error.toString());
+                });
               },
               child: const Text('GO'),
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(40),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)
-                )
-              ),
+                  minimumSize: const Size.fromHeight(40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0))),
             )
           ],
         ));
+
+
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+        content: Text(message)
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

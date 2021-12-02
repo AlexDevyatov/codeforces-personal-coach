@@ -14,9 +14,9 @@ class ProfileResponse {
   }
 }
 
-Future<ProfileResponse> fetchProfileResponse() async {
+Future<ProfileResponse> fetchProfileResponse(String handle) async {
   final response = await http.get(
-      Uri.parse('https://codeforces.com/api/user.info?handles=Triss_Merigold'));
+      Uri.parse('https://codeforces.com/api/user.info?handles=$handle'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

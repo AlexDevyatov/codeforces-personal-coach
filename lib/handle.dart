@@ -64,6 +64,9 @@ class HandleForm extends StatelessWidget {
               child: const Text('GO'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)
+                )
               ),
             )
           ],

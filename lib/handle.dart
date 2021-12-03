@@ -72,7 +72,7 @@ class HandleForm extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfileRoute()));
+                            builder: (context) => ProfileRoute(value.profile)));
                 })
                 .catchError((error) {
                   log('error: ${error.toString()}');
@@ -87,8 +87,6 @@ class HandleForm extends StatelessWidget {
             )
           ],
         ));
-
-
   }
 
   void _showSnackBar(BuildContext context, String message) {

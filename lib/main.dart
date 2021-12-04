@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             margin: const EdgeInsets.all(8.0),
             child: Text(
               snapshot.data!.profile.handle,
-              style: getStyle(snapshot.data!.profile.rating),
+              style: getHandleStyle(snapshot.data!.profile.rating),
             ),
           );
         } else if (snapshot.hasError) {
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             margin: const EdgeInsets.all(8.0),
             child: Text(
               snapshot.data!.profile.rating.toString(),
-              style: getStyle(snapshot.data!.profile.rating),
+              style: getHandleStyle(snapshot.data!.profile.rating),
             ),
           );
         } else if (snapshot.hasError) {

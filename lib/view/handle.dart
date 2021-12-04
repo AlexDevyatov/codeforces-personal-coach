@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cf_info_app/first.dart';
+import 'package:cf_info_app/view/first.dart';
 import 'package:cf_info_app/model/functions.dart';
 import 'package:cf_info_app/model/profile_response.dart';
 import 'package:flutter/material.dart';

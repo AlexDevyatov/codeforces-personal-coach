@@ -69,12 +69,12 @@ class HandleForm extends StatelessWidget {
                     fetchProfileResponse(handleController.text);
                 profileInfoFuture.then((value) {
                   log('data: ${value.status}');
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileRoute(value.profile)));
-                })
-                .catchError((error) {
+                  handleController.clear();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileRoute(value.profile)));
+                }).catchError((error) {
                   log('error: ${error.toString()}');
                   _showSnackBar(context, error.toString());
                 });
@@ -90,9 +90,7 @@ class HandleForm extends StatelessWidget {
   }
 
   void _showSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-        content: Text(message)
-    );
+    final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

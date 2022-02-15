@@ -18,7 +18,7 @@ class ProfileRoute extends StatelessWidget {
           automaticallyImplyLeading: false,
           actions: [
             PopupMenuButton(
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
               itemBuilder: (context) => [
                 const PopupMenuItem<int>(
                   value: 0,

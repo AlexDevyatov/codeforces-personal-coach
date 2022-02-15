@@ -1,33 +1,22 @@
 import 'dart:developer';
 
-import 'package:cf_info_app/view/first.dart';
-import 'package:cf_info_app/model/functions.dart';
+import 'package:cf_info_app/view/profile_screen.dart';
 import 'package:cf_info_app/model/profile_response.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+class EnterHandleScreen extends StatelessWidget {
+  const EnterHandleScreen({Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Codeforces Profile Fetching'),
-          ),
-          body: Center(
-            child: HandleForm(),
-          ),
-        ));
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Codeforces Profile Fetching'),
+      ),
+      body: Center(
+        child: HandleForm(),
+      ),
+    );
   }
 }
 
@@ -73,7 +62,7 @@ class HandleForm extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ProfileRoute(value.profile)));
+                          builder: (context) => ProfileScreen(value.profile)));
                 }).catchError((error) {
                   log('error: ${error.toString()}');
                   _showSnackBar(context, error.toString());

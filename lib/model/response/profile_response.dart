@@ -1,4 +1,4 @@
-import 'profile.dart';
+import '../profile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 

@@ -5,7 +5,7 @@ import 'package:cf_info_app/model/profile.dart';
 import 'package:cf_info_app/view/handle_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../model/profile_response.dart';
+import '../model/response/profile_response.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen(this.profile, {Key? key}) : super(key: key);

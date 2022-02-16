@@ -4,11 +4,16 @@ import 'package:cf_info_app/model/profile.dart';
 import 'package:cf_info_app/view/handle_screen.dart';
 import 'package:cf_info_app/view/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(const StartScreen());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(new StartScreen());
+  });
 }
 
 class StartScreen extends StatelessWidget {

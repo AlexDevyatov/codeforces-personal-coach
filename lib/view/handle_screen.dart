@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:cf_info_app/model/profile.dart';
+import 'package:cf_info_app/model/submission.dart';
 import 'package:cf_info_app/view/profile_screen.dart';
-import 'package:cf_info_app/model/profile_response.dart';
+import 'package:cf_info_app/model/response/profile_response.dart';
+import 'package:cf_info_app/model/response/submissions_response.dart';
 import 'package:flutter/material.dart';
 
 class EnterHandleScreen extends StatelessWidget {
@@ -53,17 +56,20 @@ class HandleForm extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 var profileInfoFuture =
                     fetchProfileResponse(handleController.text);
-                profileInfoFuture.then((value) {
-                  log('data: ${value.status}');
-                  handleController.clear();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileScreen(value.profile)));
-                }).catchError((error) {
+                var submissionsFuture =
+                    fetchSubmissionsResponse(handleController.text);
+                await Future.wait([
+                  profileInfoFuture.then((value) => value.profile),
+                  submissionsFuture.then((value) => value.result),
+                ]).then((value) =>
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreen(value[0] as Profile)))
+                ).catchError((error) {
                   log('error: ${error.toString()}');
                   _showSnackBar(context, error.toString());
                 });
